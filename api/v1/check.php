@@ -3,10 +3,11 @@ header('Content-Type: application/json');
 
 require_once '../../database.php';
 
-$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
-$row = filter_var($_POST['row'], FILTER_SANITIZE_STRING);
-$col = filter_var($_POST['col'], FILTER_SANITIZE_STRING);
-$id = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
+$data = json_decode(file_get_contents('php://input'), true);
+$value = $data['value'];
+$row = $data['row'];
+$col = $data['col'];
+$id = $data['id'];
 
 
 $result = $pdo->query("SELECT * FROM puzzles WHERE id=$id");
